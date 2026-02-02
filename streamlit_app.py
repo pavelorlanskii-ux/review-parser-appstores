@@ -158,8 +158,8 @@ st.title("Узнать свои отзывы в App Store")
 
 st.caption("Собираем отзывы только из App Store.")
 
-app_url = st.text_input("Ссылка на приложение", "https://apps.apple.com/ru/app/кхл/id455938766")
-countries = st.text_input("Страны (через запятую)", "ru,us,gb,de,fr")
+app_url = st.text_input("Ссылка на приложение", value="")
+countries = st.text_input("Страны (через запятую)", value="")
 max_n = st.number_input("Сколько отзывов собрать из каждой страны", min_value=1, value=200, step=1)
 
 country_list = [c.strip().lower() for c in countries.split(",") if c.strip()]
