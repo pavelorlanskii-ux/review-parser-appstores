@@ -14,10 +14,22 @@ COLUMNS_ORDER = [
     "review_id","date","rating","title","text","author","country","language","link"
 ]
 
-def extract_app_id(app_url: str) -> str:
-    m = re.search(r"id(\d+)", app_url)
+def extract_app_id(app_input: str) -> str:
+    """
+    Принимает ссылку App Store или просто числовой app_id.
+    Примеры:
+      - "https://apps.apple.com/ru/app/.../id455938766" -> "455938766"
+      - "455938766" -> "455938766"
+    """
+    s = (app_input or "").strip()
+
+    # если ввели только цифры — это уже app_id
+    if s.isdigit():
+        return s
+
+    m = re.search(r"id(\d+)", s)
     if not m:
-        raise ValueError("В ссылке не найдено id<число>.")
+        raise ValueError("Не найден ID приложения. Вставь ссылку App Store или просто число (например 455938766).")
     return m.group(1)
 
 def make_app_page_link(country: str, app_id: str) -> str:
