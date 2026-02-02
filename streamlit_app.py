@@ -154,18 +154,18 @@ def update_reviews(app_url: str, country_list: List[str], max_per_country: Optio
 
 # ---------- UI ----------
 st.set_page_config(page_title="App Store Reviews", layout="wide")
-st.title("App Store Reviews Parser")
+st.title("Узнать свои отзывы в App Store")
 
-st.caption("Источник: Apple iTunes RSS (public). Может быть ограничение по глубине истории и по странам.")
+st.caption("Собираем отзывы только из App Store.")
 
 app_url = st.text_input("Ссылка на приложение", "https://apps.apple.com/ru/app/кхл/id455938766")
 countries = st.text_input("Страны (через запятую)", "ru,us,gb,de,fr")
-max_n = st.number_input("Максимум отзывов на страну (0 = без ограничения)", min_value=0, value=200, step=50)
+max_n = st.number_input("Сколько отзывов собрать из каждой страны", min_value=1, value=200, step=1)
 
 country_list = [c.strip().lower() for c in countries.split(",") if c.strip()]
-max_per_country = None if max_n == 0 else int(max_n)
+max_per_country = int(max_n)
 
-if st.button("Собрать/обновить"):
+if st.button("Собрать отзывы"):
     df = update_reviews(app_url, country_list, max_per_country=max_per_country)
     st.success(f"Готово! Всего отзывов: {len(df)}")
     st.dataframe(df.tail(20), use_container_width=True)
