@@ -166,7 +166,7 @@ def update_reviews(app_url: str, country_list: List[str], max_per_country: Optio
 
 # ---------- UI ----------
 st.set_page_config(page_title="App Store Reviews", layout="wide")
-st.title("Узнать свои отзывы в App Store")
+st.title("Узнай свои отзывы в App Store")
 
 st.caption("Собираем отзывы только из App Store.")
 
